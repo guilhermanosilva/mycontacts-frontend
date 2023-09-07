@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.header`
+  margin-bottom: 24px;
 
-a {
+  a {
     text-decoration: none;
 
     display: flex;
