@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import isEmailValid from '../../utils/isEmailValid';
+import formatPhone from '../../utils/formatPhone';
 
 import Button from '../Button';
 import FormGroup from '../FormGroup';
@@ -34,22 +35,26 @@ export default function ContactForm({ buttonLabel }) {
     else { removeError('email'); }
   }
 
+  function handlePhoneChange(e) {
+    setPhone(formatPhone(e.target.value));
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input value={name} placeholder="Nome" onChange={handleNameChange} error={getErrorMessageByFieldName('name')} />
       </FormGroup>
 
       <FormGroup error={getErrorMessageByFieldName('email')}>
-        <Input value={email} placeholder="Email" onChange={handleEmailChange} error={getErrorMessageByFieldName('email')} />
+        <Input value={email} type="email" placeholder="Email" onChange={handleEmailChange} error={getErrorMessageByFieldName('email')} />
       </FormGroup>
 
       <FormGroup>
-        <Input value={phone} placeholder="Telefone" onChange={(e) => setPhone(e.target.value)} />
+        <Input value={phone} type="tel" placeholder="Telefone" maxLength={15} onChange={handlePhoneChange} />
       </FormGroup>
 
       <FormGroup>

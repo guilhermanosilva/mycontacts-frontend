@@ -10,6 +10,7 @@ export default styled.input`
   font-size: 16px;
   border: 2px solid #fff;
   outline: none;
+  appearance: none;
   transition: border-color 0.2s ease-in;
 
   &:focus {
