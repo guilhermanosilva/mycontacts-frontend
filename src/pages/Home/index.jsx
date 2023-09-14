@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
+import Loader from '../../components/Loader';
 
 import {
   Card,
@@ -12,21 +13,30 @@ import {
   InputSearchContainer,
   ListHeader,
 } from './styles';
+import delay from '../../utils/delay';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
   )), [contacts, searchTerm]);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
       .then(async (res) => {
+        await delay(500);
+
         const jsonContacts = await res.json();
         setContacts(jsonContacts);
+      })
+      .catch((error) => console.log('error', error))
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [orderBy]);
 
@@ -40,6 +50,8 @@ export default function Home() {
 
   return (
     <Container>
+      <Loader isLoading={isLoading} />
+
       <InputSearchContainer>
         <input value={searchTerm} type="text" placeholder="Pesquisar pelo none..." onChange={handleChangeSearchTerm} />
       </InputSearchContainer>
