@@ -4,7 +4,7 @@ export const Overlay = styled.div`
   background-color: rgba(0,0,0,0.6);
   backdrop-filter: blur(4px);
 
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   left: 0;
@@ -22,15 +22,13 @@ export const Container = styled.div`
   box-shadow: 0 4px 10px rgba(0,0,0,0.04);
   width: min(450px, 100%);
 
-  h1 {
+  > h1 {
     font-size: 22px;
-    color: ${({ theme, danger }) => (
-    danger ? theme.colors.danger.main : theme.colors.gray[900]
-  )}
+    color: ${({ theme, danger }) => (danger ? theme.colors.danger.main : theme.colors.gray[900])}
   }
 
-  p {
-    margin-top: 8px;
+  .modal-body {
+    margin-top: 32px;
   }
 `;
 
@@ -44,7 +42,11 @@ export const Footer = styled.footer`
     background-color: transparent;
     border: none;
     font-size: 16px;
-    margin-right: 8px;
+    margin-right: 24px;
     color: ${({ theme }) => theme.colors.gray[200]};
+
+    &:disabled {
+      cursor: default;
+    }
   }
 `;
