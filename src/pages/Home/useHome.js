@@ -57,7 +57,6 @@ export default function useHome() {
 
   function handleCancelModal() {
     setIsDeleteModalVisible(false);
-    setContactBeingDeleted(null);
   }
 
   async function handleConfirmDeleteContact() {
