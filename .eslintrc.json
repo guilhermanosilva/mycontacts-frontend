@@ -22,6 +22,7 @@
     "class-methods-use-this": "off",
     "no-empty": ["error", { "allowEmptyCatch": true }],
 
+    "react/require-default-props": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-no-bind": "off",

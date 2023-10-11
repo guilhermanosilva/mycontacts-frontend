@@ -9,15 +9,16 @@ import ReactPortal from '../ReactPortal';
 import { Container, Footer, Overlay } from './styles';
 
 export default function Modal({
-  danger,
+  danger = false,
+  isLoading = false,
+  cancelLable = 'Cancelar',
+  confirmLabel = 'Confirmar',
   title,
   children,
-  cancelLable,
-  confirmLabel,
   onCancel,
   onConfirm,
   visible,
-  isLoading,
+
 }) {
   const { animatedElementRef, shouldRender } = useAnimatedUnmount(visible);
 
@@ -70,11 +71,4 @@ Modal.propTypes = {
   onConfirm: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool,
-};
-
-Modal.defaultProps = {
-  danger: false,
-  isLoading: false,
-  cancelLable: 'Cancelar',
-  confirmLabel: 'Confirmar',
 };
